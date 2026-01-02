@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0ea5e9"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="pin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.98"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.88"/>
+    </linearGradient>
+  </defs>
+
+  <!-- soft rounded background -->
+  <rect x="4" y="4" width="56" height="56" rx="14" fill="url(#bg)"/>
+
+  <!-- map pin -->
+  <path
+    d="M32 14c-7.2 0-13 5.8-13 13 0 9.9 13 24 13 24s13-14.1 13-24c0-7.2-5.8-13-13-13z"
+    fill="url(#pin)"
+  />
+
+  <!-- inner circle -->
+  <circle cx="32" cy="27" r="6.5" fill="#0f172a" opacity="0.18"/>
+
+  <!-- heart -->
+  <path
+    d="M32 33.7c-2.1-2.5-6.1-2.1-7.7.4-1.2 2 .2 4.4 1.8 5.9 1.7 1.6 4.9 3.9 5.9 4.6 1-.7 4.2-3 5.9-4.6 1.6-1.5 3-3.9 1.8-5.9-1.6-2.5-5.6-2.9-7.7-.4z"
+    fill="#ef4444"
+    opacity="0.95"
+  />
+</svg>
+
+

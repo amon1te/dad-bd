@@ -1,0 +1,327 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Warm, nostalgic birthday palette */
+    --background: 40 30% 97%;
+    --foreground: 220 30% 15%;
+
+    --card: 40 25% 95%;
+    --card-foreground: 220 30% 15%;
+
+    --popover: 40 25% 98%;
+    --popover-foreground: 220 30% 15%;
+
+    /* Rich gold primary */
+    --primary: 38 80% 50%;
+    --primary-foreground: 40 30% 97%;
+
+    /* Soft cream secondary */
+    --secondary: 40 20% 90%;
+    --secondary-foreground: 220 30% 20%;
+
+    /* Muted warm tones */
+    --muted: 40 15% 88%;
+    --muted-foreground: 220 15% 45%;
+
+    /* Burgundy accent */
+    --accent: 350 60% 40%;
+    --accent-foreground: 40 30% 97%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 40 20% 85%;
+    --input: 40 20% 85%;
+    --ring: 38 80% 50%;
+
+    --radius: 0.75rem;
+
+    /* Map-specific colors */
+    --map-bg: 220 40% 15%;
+    --map-ocean: 215 45% 20%;
+    --map-land: 220 25% 35%;
+    --map-land-hover: 220 25% 45%;
+    --map-visited: 38 85% 55%;
+    --map-visited-hover: 38 90% 60%;
+    --map-selected: 38 95% 65%;
+    --map-border: 220 20% 25%;
+
+    /* Panel colors */
+    --panel-bg: 40 25% 97%;
+    --panel-header: 40 30% 94%;
+
+    /* Sidebar */
+    --sidebar-background: 40 20% 96%;
+    --sidebar-foreground: 220 30% 20%;
+    --sidebar-primary: 38 80% 50%;
+    --sidebar-primary-foreground: 40 30% 97%;
+    --sidebar-accent: 40 15% 90%;
+    --sidebar-accent-foreground: 220 30% 20%;
+    --sidebar-border: 40 20% 85%;
+    --sidebar-ring: 38 80% 50%;
+  }
+
+  .dark {
+    --background: 220 35% 10%;
+    --foreground: 40 20% 95%;
+
+    --card: 220 30% 12%;
+    --card-foreground: 40 20% 95%;
+
+    --popover: 220 30% 12%;
+    --popover-foreground: 40 20% 95%;
+
+    --primary: 38 85% 55%;
+    --primary-foreground: 220 35% 10%;
+
+    --secondary: 220 25% 18%;
+    --secondary-foreground: 40 20% 90%;
+
+    --muted: 220 25% 20%;
+    --muted-foreground: 40 15% 65%;
+
+    --accent: 350 55% 50%;
+    --accent-foreground: 40 20% 95%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 40 20% 95%;
+
+    --border: 220 25% 20%;
+    --input: 220 25% 20%;
+    --ring: 38 85% 55%;
+
+    --map-bg: 220 45% 8%;
+    --map-ocean: 220 50% 10%;
+    --map-land: 220 30% 25%;
+    --map-land-hover: 220 30% 35%;
+    --map-visited: 38 90% 50%;
+    --map-visited-hover: 38 95% 55%;
+    --map-selected: 38 100% 60%;
+    --map-border: 220 25% 15%;
+
+    --panel-bg: 220 30% 12%;
+    --panel-header: 220 28% 15%;
+
+    --sidebar-background: 220 30% 10%;
+    --sidebar-foreground: 40 20% 90%;
+    --sidebar-primary: 38 85% 55%;
+    --sidebar-primary-foreground: 220 35% 10%;
+    --sidebar-accent: 220 25% 15%;
+    --sidebar-accent-foreground: 40 20% 90%;
+    --sidebar-border: 220 25% 18%;
+    --sidebar-ring: 38 85% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .map-country {
+    @apply transition-all duration-300 cursor-pointer;
+    fill: hsl(var(--map-land));
+    stroke: hsl(var(--map-border));
+    stroke-width: 0.5;
+  }
+
+  .map-country:hover {
+    fill: hsl(var(--map-land-hover));
+  }
+
+  .map-country.visited {
+    fill: hsl(var(--map-visited));
+    stroke: hsl(var(--primary));
+    stroke-width: 1;
+  }
+
+  .map-country.visited:hover {
+    fill: hsl(var(--map-visited-hover));
+  }
+
+  .map-country.selected {
+    fill: hsl(var(--map-selected));
+    stroke: hsl(var(--accent));
+    stroke-width: 2;
+    filter: drop-shadow(0 0 8px hsl(var(--primary) / 0.5));
+  }
+
+  .map-country.home {
+    fill: hsl(190 85% 45%);
+    stroke: hsl(190 90% 60%);
+    stroke-width: 2;
+    filter: drop-shadow(0 0 10px hsl(190 85% 50% / 0.6));
+  }
+
+  .map-country.home:hover {
+    fill: hsl(190 90% 50%);
+  }
+
+  .panel-enter {
+    animation: slide-in 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .panel-exit {
+    animation: slide-out 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .photo-card {
+    @apply relative overflow-hidden rounded-xl shadow-lg;
+  }
+
+  .photo-card img {
+    @apply w-full h-full object-cover transition-transform duration-500;
+  }
+
+  .photo-card:hover img {
+    @apply scale-105;
+  }
+
+  .stat-card {
+    @apply relative overflow-hidden rounded-2xl p-6 bg-card border border-border/50;
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+
+  .stat-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0;
+    @apply transition-opacity duration-300;
+  }
+
+  .stat-card:hover::before {
+    @apply opacity-100;
+  }
+
+  .country-list-item {
+    @apply flex items-center gap-3 p-3 rounded-xl cursor-pointer;
+    @apply transition-all duration-200 hover:bg-secondary;
+  }
+
+  .country-list-item.active {
+    @apply bg-primary/10 border-l-4 border-primary;
+  }
+
+  .search-input {
+    @apply w-full px-4 py-3 rounded-xl bg-secondary border border-border;
+    @apply placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50;
+    @apply transition-all duration-200;
+  }
+
+  .badge-continent {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+    @apply bg-primary/10 text-primary;
+  }
+
+  .gallery-nav-btn {
+    @apply absolute top-1/2 -translate-y-1/2 z-10;
+    @apply w-10 h-10 rounded-full bg-background/90 backdrop-blur-sm;
+    @apply flex items-center justify-center shadow-lg;
+    @apply transition-all duration-200 hover:bg-background hover:scale-110;
+    @apply disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .font-display {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  .font-sans {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .gold-gradient {
+    @apply bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500;
+  }
+
+  .text-gold {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-600;
+  }
+
+  .map-gradient {
+    background: linear-gradient(135deg, hsl(var(--map-bg)) 0%, hsl(var(--map-ocean)) 100%);
+  }
+
+  .glass-panel {
+    @apply bg-background/80 backdrop-blur-xl border border-border/50;
+  }
+
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(var(--primary) / 0.1) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px hsl(var(--primary) / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+  }
+}
