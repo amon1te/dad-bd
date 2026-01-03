@@ -813,17 +813,6 @@ export const CountryPanel = ({ trip, isOpen, onClose, onNavigate, hasPrev, hasNe
                               </button>
                               <button
                                 onClick={() => {
-                                  setActiveCaption('');
-                                  saveActiveCaption();
-                                  setShowMenu(false);
-                                }}
-                                className="w-full px-4 py-2 text-left text-sm hover:bg-secondary flex items-center gap-2"
-                              >
-                                <Trash2 className="w-4 h-4" />
-                                Удалить заметку
-                              </button>
-                              <button
-                                onClick={() => {
                                   openTagger();
                                   setShowMenu(false);
                                 }}
@@ -854,12 +843,13 @@ export const CountryPanel = ({ trip, isOpen, onClose, onNavigate, hasPrev, hasNe
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 overflow-hidden">
-                    <div className="bg-black/10">
+                  {/* Mobile-first layout: stack; desktop: two columns */}
+                  <div className="flex flex-col lg:grid lg:grid-cols-2 gap-0 overflow-hidden flex-1">
+                    <div className="bg-black/10 flex items-center justify-center overflow-hidden h-[45vh] lg:h-auto">
                       <img
                         src={activePhoto.url}
                         alt={activePhoto.name}
-                        className="w-full h-[min(70vh,720px)] object-contain bg-black/5"
+                        className="w-full h-full object-cover lg:object-contain bg-black/5"
                         onError={(e) => {
                           const imgEl = e.currentTarget;
                           if (!imgEl.dataset.fallback) {
@@ -869,7 +859,7 @@ export const CountryPanel = ({ trip, isOpen, onClose, onNavigate, hasPrev, hasNe
                         }}
                       />
                     </div>
-                    <div className="p-4 space-y-3 overflow-y-auto max-h-[min(70vh,720px)]">
+                    <div className="p-4 space-y-3 overflow-y-auto flex-1">
                       {/* People */} 
                       <div className="space-y-2">
                         <div className="flex items-center justify-between">
@@ -1076,15 +1066,15 @@ export const CountryPanel = ({ trip, isOpen, onClose, onNavigate, hasPrev, hasNe
                           ) : (
                             <div className="space-y-2">
                               {taggerFaces.map((f, idx) => (
-                                <div key={idx} className="flex items-center gap-3">
-                                  <img src={f.thumb} className="w-10 h-10 rounded-full object-cover border border-border" />
+                                <div key={idx} className="flex flex-col sm:flex-row sm:items-center gap-3">
+                                  <img src={f.thumb} className="w-10 h-10 rounded-full object-cover border border-border self-start sm:self-auto" />
                                   <select
                                     value={f.selectedId}
                                     onChange={(e) => {
                                       const v = e.target.value;
                                       setTaggerFaces((prev) => prev.map((x, i) => (i === idx ? { ...x, selectedId: v } : x)));
                                     }}
-                                    className="flex-1 px-3 py-2 rounded-xl bg-background border border-border text-sm"
+                                    className="w-full sm:flex-1 px-3 py-2 rounded-xl bg-background border border-border text-sm"
                                   >
                                     <option value="">Выберите человека… (или пропустить)</option>
                                     <option value="new">➕ Добавить нового</option>
@@ -1104,11 +1094,11 @@ export const CountryPanel = ({ trip, isOpen, onClose, onNavigate, hasPrev, hasNe
                                         );
                                       }}
                                       placeholder="Имя…"
-                                      className="w-32 px-2 py-2 rounded-xl bg-background border border-border text-sm"
+                                      className="w-full sm:w-40 px-2 py-2 rounded-xl bg-background border border-border text-sm"
                                     />
                                   )}
                                   {f.matchedId && (
-                                    <span className="text-[11px] text-muted-foreground whitespace-nowrap">
+                                    <span className="text-[11px] text-muted-foreground whitespace-nowrap self-start sm:self-auto">
                                       AI {Math.round((f.confidence || 0) * 100)}%
                                     </span>
                                   )}
